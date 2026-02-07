@@ -1,0 +1,328 @@
+* {
+    margin: 0%;
+    padding: 0%;
+
+}
+
+body {
+    background-color: rgb(238, 208, 172);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.background-gif {
+    position: absolute;
+    bottom: 30px;
+    right: 100px;
+}
+
+.gif {
+    width: 500px;
+    height: auto;
+}
+
+/* ENVELOPE */
+.container {
+    position: relative;
+}
+
+.envelope {
+    position: relative;
+    width: 650px;
+    height: 375px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
+}
+
+.envelope-back, .envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #7bb9ec;
+    border: 3px solid #1c6feb;
+    border-radius: 5px;
+}
+
+.envelope-back {
+    background: linear-gradient(135deg, #7bb9ec 0%, #92c5ee 100%);
+}
+
+.envelope-front {
+    background: linear-gradient(135deg, #7bb9ec 0%, #92c5ee 100%);
+    z-index: 2;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(135deg, #1c6feb 0%, #1c6feb 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 3;
+    border-radius: 5px 5px 0 0;
+}
+
+.envelope-flap::before {
+    content: "💗";
+    position: absolute;
+    top: 125px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 65px;
+}
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+
+/* LETTER */
+.letter {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 620px;
+    height: 350px;
+    background: #b2cae9;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(100px) scale(0);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 4; 
+}
+
+.letter.show {
+    transform: translateY(-50px) scale(1);
+    opacity: 1;
+}
+
+.letter-content h2 {
+    text-align: center;
+    color: #000000;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 40px;
+    line-height: 1.4;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    position: relative;
+    padding: 15px 20px;
+    border-radius: 25px;
+    background: #c7e6f5;
+    border: 2px solid #b2cae9;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.checkbox-option:hover {
+    background: #ffe6e6;
+    border-color: #5661fa;
+    transform: translateY(-2px);
+}
+
+.checkbox-option input {
+    display: none;
+}
+
+.checkmark {
+    position: absolute;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #b2cae9;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.checkbox-option input:checked ~ .checkmark {
+    background: #5661fa;
+    border-color: #5661fa;
+}
+
+.checkbox-option input:checked ~ .checkmark::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}   
+
+.celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+}
+
+.celebration.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.celebration-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #160a0ae7;
+    animation: bounceIn 1s ease;
+}
+
+.celebration-text h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.celeb-text img {;
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+
+
+/* CONFETTIS */
+.confetti {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.confetti::before,
+.confetti::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #ff6b6b;
+    animation: confetti-fall 3s linear infinite;
+}
+.confetti::before {
+    left: 20%;
+    animation-delay: 0s;
+    background: #4ecdc4;
+}
+.confetti::after {
+    left: 80%;
+    animation-delay: 1s;
+    background: #ffe66d;
+}
+
+.hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.hearts::before,
+.hearts::after {
+    content: '💖';
+    position: absolute;
+    font-size: 100px;
+    animation: hearts-float 4s ease-in-out infinite;
+}
+.hearts::before {
+    left: 30%;
+    animation-delay: 0.5s;
+}
+.hearts::after {
+    left: 70%;
+    animation-delay: 2s;
+}
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes bounceIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+@keyframes hearts-float {
+    0%, 100% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(50vh) scale(1);
+        opacity: 1;
+    }
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .envelope {
+        width: 250px;
+        height: 166px;
+    }
+    
+    .letter {
+        width: 220px;
+        height: 300px;
+        left: 15px;
+    }
+    
+    .letter-content h2 {
+        font-size: 20px;
+    }
+    
+    .celebration-text h1 {
+        font-size: 36px;
+    }
+    
+    .celebration-text p {
+        font-size: 20px;
+    }
+}
